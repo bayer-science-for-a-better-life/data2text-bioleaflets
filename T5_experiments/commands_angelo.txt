@@ -1,0 +1,49 @@
+#export DATA_DIR="/home/ruslan_yermakov/T5_experiments/input_data"
+#export DATA_DIR_OUT="/home/ruslan_yermakov/T5_experiments/outputs"
+
+export DATA_DIR="/home/angelo_ziletti/nlg-ra/T5_experiments/T5_condition/input_data"
+export DATA_DIR_OUT="/home/angelo_ziletti/nlg-ra/T5_experiments/T5_condition/outputs"
+
+cd /home/angelo_ziletti/nlg-ra/transformers/examples/seq2seq/
+
+### BART Distil
+#python finetune_trainer.py --model_name_or_path distilbart-cnn-12-6 --data_dir $DATA_DIR --output_dir $DATA_DIR_OUT --n_train -1 --n_val -1 --n_test -1 --max_target_length 512 --val_max_target_length 512 --test_max_target_length 512 --eval_steps 2000 --save_steps 2000 --num_train_epochs 15 --do_train --do_eval --predict_with_generate --overwrite_output_dir --learning_rate=1e-3 --gradient_accumulation_steps 4 --per_device_train_batch_size 2 --per_device_eval_batch_size 2 --load_best_model_at_end True--metric_for_best_model bertscore --greater_is_better True
+
+
+#python finetune_trainer.py --model_name_or_path facebook/bart-large-cnn --data_dir $DATA_DIR --output_dir $DATA_DIR_OUT --n_train -1 --n_val -1 --n_test -1 --max_target_length 512 --val_max_target_length 512 --test_max_target_length 512 --task summarization --save_steps 1000 --num_train_epochs 15 --save_total_limit 4 --do_train True --do_eval False --do_predict False --predict_with_generate False --evaluation_strategy no --gradient_accumulation_steps 16 --per_device_train_batch_size 2 --per_device_eval_batch_size 8 --learning_rate 5e-5 --seed 1
+
+### Fine-tuning T5-plain
+
+
+# hp_1e_5_1_1_hard_hard
+python finetune_trainer.py --model_name_or_path t5-base --data_dir $DATA_DIR --output_dir $DATA_DIR_OUT --n_train -1 --n_val -1 --n_test -1 --max_target_length 512 --val_max_target_length 512 --test_max_target_length 512 --task summarization --eval_steps 2000 --save_steps 2000 --num_train_epochs 20 --save_total_limit 4 --do_train True --do_eval True --predict_with_generate True --evaluation_strategy steps --overwrite_output_dir --gradient_accumulation_steps 8 --per_device_train_batch_size 2 --per_device_eval_batch_size 2 --eval_beams 1 --learning_rate 1e-5 --seed 1
+
+# hp_1e_3_1
+#python finetune_trainer.py --model_name_or_path t5-base --data_dir $DATA_DIR --output_dir $DATA_DIR_OUT --n_train -1 --n_val -1 --n_test -1 --max_target_length 512 --val_max_target_length 512 --test_max_target_length 512 --task summarization --save_steps 2000 --num_train_epochs 20 --save_total_limit 4 --do_train True --do_eval False --do_predict False --predict_with_generate False --evaluation_strategy no --gradient_accumulation_steps 16 --per_device_train_batch_size 2 --per_device_eval_batch_size 8 --learning_rate 1e-3 --seed 1
+
+# hp_5e_5_1
+#python finetune_trainer.py --model_name_or_path t5-base --data_dir $DATA_DIR --output_dir $DATA_DIR_OUT --n_train -1 --n_val -1 --n_test -1 --max_target_length 512 --val_max_target_length 512 --test_max_target_length 512 --task summarization --save_steps 1000 --num_train_epochs 20 --save_total_limit 4 --do_train True --do_eval False --do_predict False --predict_with_generate False --evaluation_strategy no --gradient_accumulation_steps 16 --per_device_train_batch_size 2 --per_device_eval_batch_size 8 --learning_rate 5e-5 --seed 1
+
+
+
+### Fine-tuning BART-base
+
+#python finetune_trainer.py --model_name_or_path facebook/bart-base --data_dir $DATA_DIR --output_dir $DATA_DIR_OUT --n_train -1 --n_val -1 --n_test -1 --max_target_length 512 --val_max_target_length 512 --test_max_target_length 512 --task summarization --save_steps 1000 --num_train_epochs 20 --save_total_limit 4 --do_train True --do_eval False --do_predict False --predict_with_generate False --evaluation_strategy no --gradient_accumulation_steps 16 --per_device_train_batch_size 2 --per_device_eval_batch_size 8 --learning_rate 5e-5 --seed 1
+
+
+
+### Evaluation
+
+./run_eval.py $DATA_DIR_OUT $DATA_DIR/val.source $DATA_DIR_OUT/valid_generations.txt --reference_path $DATA_DIR/val.target --score_path $DATA_DIR_OUT/valid_scores.json --device cuda --bs 8 --num_beams 1
+
+
+./run_eval.py $DATA_DIR_OUT $DATA_DIR/val.source $DATA_DIR_OUT/valid_generations_beam_10.txt --reference_path $DATA_DIR/val.target --score_path $DATA_DIR_OUT/valid_scores_beam_10.json --device cuda --bs 8 --num_beams 10
+
+
+
+# eval val dataset
+./run_eval.py ../../../../T5_experiments/outputs $DATA_DIR/val.source $DATA_DIR_OUT/mh_val_generations_explicit_path_model.txt --reference_path $DATA_DIR/val.target --score_path $DATA_DIR_OUT/cnn_rouge_explicit_path_model.json  --device cuda --bs 2
+
+
+# eval test dataset
+./run_eval.py ../../../../T5_experiments/outputs $DATA_DIR/test.source $DATA_DIR_OUT/mh_test_generations_explicit_path_model.txt --reference_path $DATA_DIR/test.target --score_path $DATA_DIR_OUT/test_cnn_rouge_explicit_path_model.json --device cuda --bs 2

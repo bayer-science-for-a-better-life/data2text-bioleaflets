@@ -1,0 +1,72 @@
+ 1999  echo "Content Planner 6 Sections generation"
+ 2000  conda activate data2text_plan_py
+ 2001  ls
+ 2002  cd nlg-ra/reproducibility/totto_data2text_plan_py/
+ 2003  ls
+ 2004  mkdir paper_code_bayer
+ 2005  ls
+ 2006  ls bayer_dataset/
+ 2007  cd paper_code_bayer/
+ 2008  cp ../bayer_dataset/Imitate_create_datasets_script_final.ipynb .
+ 2009  ls
+ 2010  mkdir preprocess
+ 2011  mkdir transform_gen
+ 2012  mkdir test
+ 2013  mkdir inter
+ 2014  ls
+ 2015  mkdir gen
+ 2016  mkdir gen_model
+ 2017  ls
+ 2018  cp ~/nlg-ra/EMA_documents.py .
+ 2019  ls
+ 2020  echo "Now create input files"
+ 2021  echo "with notebook - Imitate create_dataset"
+ 2022  ls
+ 2023  ls ..
+ 2024  cd ..
+ 2025  ls
+ 2026  mv paper_code_bayer paper_code_section1
+ 2027  ls
+ 2028  cd paper_code_section1/
+ 2029  ls
+ 2030  ls inter/
+ 2031  ls
+ 2032  ls test/
+ 2033  ls inter/
+ 2034  ls
+ 2035  echo "Now preprocessing part"
+ 2036  BASE=~/nlg-ra/reproducibility/totto_data2text_plan_py/paper_code_section1
+ 2037  IDENTIFIER=cc
+ 2038  ls 
+ 2039  # python preprocess.py -train_src1 $BASE/rotowire/src_train.txt -train_tgt1 $BASE/rotowire/train_content_plan.txt -train_src2 $BASE/rotowire/inter/train_content_plan.txt -train_tgt2 $BASE/rotowire/tgt_train.txt -valid_src1 $BASE/rotowire/src_valid.txt -valid_tgt1 $BASE/rotowire/valid_content_plan.txt -valid_src2 $BASE/rotowire/inter/valid_content_plan.txt -valid_tgt2 $BASE/rotowire/tgt_valid.txt -save_data $BASE/preprocess/roto -src_seq_length 1000 -tgt_seq_length 1000 -dynamic_dict -train_ptr $BASE/rotowire/train-roto-ptrs.txt
+ 2040  python preprocess.py -train_src1 $BASE/src_train.txt -train_tgt1 $BASE/train_content_plan.txt -train_src2 $BASE/inter/train_content_plan.txt -train_tgt2 $BASE/tgt_train.txt -valid_src1 $BASE/src_valid.txt -valid_tgt1 $BASE/valid_content_plan.txt -valid_src2 $BASE/inter/valid_content_plan.txt -valid_tgt2 $BASE/tgt_valid.txt -save_data $BASE/preprocess/roto -src_seq_length 1000 -tgt_seq_length 1000 -dynamic_dict -train_ptr $BASE/train-roto-ptrs.txt
+ 2041  cd ..
+ 2042  python preprocess.py -train_src1 $BASE/src_train.txt -train_tgt1 $BASE/train_content_plan.txt -train_src2 $BASE/inter/train_content_plan.txt -train_tgt2 $BASE/tgt_train.txt -valid_src1 $BASE/src_valid.txt -valid_tgt1 $BASE/valid_content_plan.txt -valid_src2 $BASE/inter/valid_content_plan.txt -valid_tgt2 $BASE/tgt_valid.txt -save_data $BASE/preprocess/roto -src_seq_length 1000 -tgt_seq_length 1000 -dynamic_dict -train_ptr $BASE/train-roto-ptrs.txt
+ 2043  GPUID=0
+ 2044  # python train.py -data $BASE/preprocess/roto -save_model $BASE/gen_model/$IDENTIFIER/roto -encoder_type1 mean -decoder_type1 pointer -enc_layers1 1 -dec_layers1 1 -encoder_type2 brnn -decoder_type2 rnn -enc_layers2 2 -dec_layers2 2 -batch_size 5 -feat_merge mlp -feat_vec_size 600 -word_vec_size 600 -rnn_size 600 -seed 1234 -start_checkpoint_at 4 -epochs 25 -optim adagrad -learning_rate 0.15 -adagrad_accumulator_init 0.1 -report_every 100 -copy_attn -truncated_decoder 100 -gpuid $GPUID -attn_hidden 64 -reuse_copy_attn -start_decay_at 4 -learning_rate_decay 0.97 -valid_batch_size 5
+ 2045  python train.py -data $BASE/preprocess/roto -save_model $BASE/gen_model/$IDENTIFIER/roto -encoder_type1 mean -decoder_type1 pointer -enc_layers1 1 -dec_layers1 1 -encoder_type2 brnn -decoder_type2 rnn -enc_layers2 2 -dec_layers2 2 -batch_size 5 -feat_merge mlp -feat_vec_size 600 -word_vec_size 600 -rnn_size 600 -seed 1234 -start_checkpoint_at 4 -epochs 25 -optim adagrad -learning_rate 0.15 -adagrad_accumulator_init 0.1 -report_every 50 -copy_attn -truncated_decoder 100 -gpuid $GPUID -attn_hidden 64 -reuse_copy_attn -start_decay_at 4 -learning_rate_decay 0.97 -valid_batch_size 5
+ 2046  ls paper_code_section1/gen_model/cc/
+ 2047  echo "now inference time"
+ 2048  # MODEL_PATH=<path to model1>
+ 2049  # MODEL_PATH=~/totto/gen_model/main/totto_stage1_acc_51.5438_ppl_5.4483_e20.pt
+ 2050  echo $BASE
+ 2051  # MODEL_PATH=$BASE/gen_model/cc/roto_stage1_acc_35.0259_ppl_22302.7258_e15.pt
+ 2052  MODEL_PATH=$BASE/gen_model/cc/roto_stage1_acc_35.0259_ppl_22302.7258_e15.pt
+ 2053  # MODEL_PATH2=~/totto/gen_model/main/totto_stage2_acc_75.7726_ppl_3.6893_e10.pt
+ 2054  # MODEL_PATH2=$BASE/gen_model/cc/roto_stage2_acc_59.6033_ppl_11.8064_e17.pt
+ 2055  MODEL_PATH2=$BASE/gen_model/cc/roto_stage2_acc_59.6033_ppl_11.8064_e17.pt
+ 2056  # python translate.py -model $MODEL_PATH -src1 $BASE/rotowire/inf_src_valid.txt -output $BASE/gen/roto_stage1_$IDENTIFIER-beam5_gens.txt -batch_size 10 -max_length 80 -gpu $GPUID -min_length 35 -stage1
+ 2057  # python27 translate.py -model $MODEL_PATH -src1 $BASE/$TEST -output $BASE/gen/roto_stage1_$IDENTIFIER-beam5_test_gens.txt -batch_size 1 -max_length 30 -gpu $GPUID -min_length 8 -stage1 -beam_size 5
+ 2058  python translate.py -model $MODEL_PATH -src1 $BASE/test/src_test.txt -output $BASE/gen/roto_stage1_$IDENTIFIER-beam5_test_gens.txt -batch_size 1 -max_length 80 -gpu $GPUID -min_length 35 -stage1
+ 2059  echo "The output summary is generated using the command"
+ 2060  # python translate.py -model $MODEL_PATH -model2 $MODEL_PATH2 -src1 $BASE/rotowire/inf_src_valid.txt -tgt1 $BASE/gen/roto_stage1_$IDENTIFIER-beam5_gens.txt -src2 $BASE/gen/roto_stage1_inter_$IDENTIFIER-beam5_gens.txt -output $BASE/gen/roto_stage2_$IDENTIFIER-beam5_gens.txt -batch_size 10 -max_length 850 -min_length 150 -gpu $GPUID
+ 2061  # python27 translate.py -model $MODEL_PATH -model2 $MODEL_PATH2 -src1 $BASE/$TEST -tgt1 $BASE/gen/roto_stage1_$IDENTIFIER-beam5_test_gens.txt -src2 $BASE/gen/roto_stage1_inter_$IDENTIFIER-beam5_test_gens.txt -output $BASE/gen/roto_stage2_$IDENTIFIER-beam5_test_gens.txt -batch_size 1 -max_length 50 -min_length 5 -gpu $GPUID
+ 2062  python translate.py -model $MODEL_PATH -model2 $MODEL_PATH2 -src1 $BASE/test/src_test.txt -tgt1 $BASE/gen/roto_stage1_$IDENTIFIER-beam5_test_gens.txt -src2 $BASE/gen/roto_stage1_inter_$IDENTIFIER-beam5_test_gens.txt -output $BASE/gen/roto_stage2_$IDENTIFIER-beam5_test_gens.txt -batch_size 1 -max_length 850 -min_length 150 -gpu $GPUID
+ 2063  echo "Convert into lexicalized plan"
+ 2064  # python scripts/create_content_plan_from_index.py $BASE/rotowire/inf_src_valid.txt $BASE/gen/roto_stage1_$IDENTIFIER-beam5_gens.txt $BASE/transform_gen/roto_stage1_$IDENTIFIER-beam5_gens.h5-tuples.txt  $BASE/gen/roto_stage1_inter_$IDENTIFIER-beam5_gens.txt
+ 2065  # python27 translate.py -model $MODEL_PATH -src1 $BASE/$TEST -output $BASE/gen/roto_stage1_$IDENTIFIER-beam5_test_gens.txt -batch_size 1 -max_length 30 -gpu $GPUID -min_length 8 -stage1 -beam_size 5
+ 2066  # python27 scripts/create_content_plan_from_index.py $BASE/$TEST $BASE/gen/roto_stage1_$IDENTIFIER-beam5_test_gens.txt $BASE/transform_gen/roto_stage1_$IDENTIFIER-beam5_test_gens.h5-tuples.txt $BASE/gen/roto_stage1_inter_$IDENTIFIER-beam5_test_gens.txt
+ 2067  python scripts/create_content_plan_from_index.py $BASE/test/src_test.txt $BASE/gen/roto_stage1_$IDENTIFIER-beam5_test_gens.txt $BASE/transform_gen/roto_stage1_$IDENTIFIER-beam5_test_gens.h5-tuples.txt  $BASE/gen/roto_stage1_inter_$IDENTIFIER-beam5_test_gens.txt
+ 2068  python translate.py -model $MODEL_PATH -model2 $MODEL_PATH2 -src1 $BASE/test/src_test.txt -tgt1 $BASE/gen/roto_stage1_$IDENTIFIER-beam5_test_gens.txt -src2 $BASE/gen/roto_stage1_inter_$IDENTIFIER-beam5_test_gens.txt -output $BASE/gen/roto_stage2_$IDENTIFIER-beam5_test_gens.txt -batch_size 1 -max_length 850 -min_length 150 -gpu $GPUID
+ 2069  echo "Success - generated section1 with Content Planner - now do the same to all other sections"
+

@@ -1,0 +1,12 @@
+{
+    "epoch": 20.0,
+    "val_gen_len": 203.3,
+    "val_loss": 1.4236,
+    "val_n_objs": -1,
+    "val_rouge1": 60.242,
+    "val_rouge2": 38.3603,
+    "val_rougeL": 45.2425,
+    "val_rougeLsum": 57.7817,
+    "val_runtime": 546.1698,
+    "val_samples_per_second": 0.218
+}

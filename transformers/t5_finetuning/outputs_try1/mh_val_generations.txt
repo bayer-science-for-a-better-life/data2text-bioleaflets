@@ -1,0 +1,100 @@
+hypertension /DX_NAME> dx_nAME> heart attack  . SYSTEM_ORGAN_SITE> heart_or_kidney_failure .
+metformin /GENERIC_NAME> dx_number> type_2_diabetes/DX_nAME> diabetes_mellitus  generic_nam> overweight sugar_controls_blood_levels treatment_nim> glubrava/Generic-Nam> insulin .
+BRAND_NAME> nuedexta /dx_nAME> dX_number> laughing . DX_NEM> crying .
+jardiance /BRAND_NAME> generic_nAME> empagliflozin/GENERIC_NEME> sglt2 inhibitors/Generic-NEme> inhibitors are a type of insulin used to treat type 2 diabetes . diabetes is a chronic disease that affects the heart, kidneys and kidneys .
+TREATMENT_NAME> highdose_inhaled_corticosteroids /treatment_nAME> dx_numb> eosinophilic_asthma, treatments_nam> asthma_medicines  /treating_nma_namics/ DX_NAmics> asthma flareups, reslizumab, sulfonamide, cortic
+GENERIC_NAME> entacapone /generic_nAME> levodopa, dx_number> Parkinson s_disease/DX_nam> Generic's_nave_node> Parkinson's disease . BRAND_NEAME> Teva, 'generik's' drug .
+hyperparathyroidism /DX_NAME> dx_nAME> high_levels_of_calcium  /Dx_ NAME> parathyroid_cancer, hypercalcaemia, hyperthyroidia, thyroid_gland, SYSTEM_ORGAN_SITE> kidney, kidney_disease, dialysis . proceedure_number> removal of_the_parathyroid
+invirase /GENERIC_NAME> generic_nAME> antiretroviral_medicines  . TREATMENT_NEAME> protease_inhibitors .
+GENERIC_NAME> generic_nAME> topotecan /Generic-NAME > cisplatin > genericosa> . TREATMENT_NEAME> chemotherapy and radiotherapy .
+BRAND_NAME> sovaldi /Brilliant_nAME> generic_nname> sofosbuvir  hepatitis_c. SYSTEM_ORGAN_SITE> liver dx_number> ribavirin, peginterferon_alfa, hepatococcus sativus, ribovirin and ribivirin .
+hyperphosphataemia /DX_NAME> treatment_nAME> dialysis  proceedure_number> peritoneal_dialysis' SYSTEM_ORGAN_SITE> abdomen  system_organ_sit> 'test_nam' serum_(blood)  (generic_ne) calcium_supplements/GENERIC_Ne) vitamin_d 
+nimenrix /BRAND_NAME> dx_nAME> bacteria  ./DX_NEXT> meningitis . SYSTEM_ORGAN_SITE> tissue .
+hiv /DX_NAME> dx_nAME> infections  AGE> 18 . rilpivirine .
+DX_NAME> muscular_dystrophy /dx_nAME> SYSTEM_ORGAN_SITE> muscle . dx-nave_limbs ./generic_nam> translarna .
+Hycamtin /GENERIC_NAME> dx_numb> ovarian_cancer  DX_nAME> small_cell_lung-cancer, SYSTEM_ORGAN_SITE> lung cancer, radiotherapy, chemotherapy .
+SYSTEM_ORGAN_SITE> neck /system_organ_sit> shoulder_muscles  DX_NAME> cervical_dystonia dx_nAME> torticollis . DISCOVERY_PATTERN_SIDE> 'botulinum_toxin'
+multiple sclerosis /DX_NAME> DX-NAME's 'multiple_sclerosis' SYSTEM_ORGAN_SITE's central_nervous_system's nerves' 'system_organ_sit's' immune system's myelin-sheath's dysfunction . 'ocrelizumab' is a drug that has been shown to cause numbness .
+DX_NAME> leukaemia, dx_nAME> lymphoma and tcell_lymphoblastic_lymphoma .
+TREATMENT_NAME> parathyroid_hormone /treatment_nAME> test_number> phosphate_levels  /TEST_NUMBER> blood_and_urine  (TEST-NAME) blood_calcium (Test_Number) SYSTEM_ORGAN_SITE> body s/system_organ_sit> systolic_
+bacteria /DX_NAME> dx_nAME> infections . SYSTEM_ORGAN_SITE> skin .
+AGE> 15 /AGE> GENERIC_NAME> suboxone generic_nAME> morphine Generic's name> narcotic suboxone.com> mcdonald's age> 15/age> .
+pemetrexed /GENERIC_NAME> generic_nname> cisplatin  dx_nAME> malignant_pleural_mesothelioma  (dx)  system_organ_sit> lung (dx] lung_cancer/DX] treatment_nam> chemo .
+TREATMENT_NAME> contraception /treatment_nAME> dx_number> pregnancy . treatments_nam> contraceptive_pill .
+GENERIC_NAME> clopidogrel /generic_nam> dx_nAME> blood_clots  /DX_Nam> atherothrombotic_events . SYSTEM_ORGAN_SITE> blood-vessels, arteries, thrombi .
+vitekta /BRAND_NAME> dx_nAME> hiv_infections/DX_ NAME> viruses  DX-nAME's hiv-integrase' elvitegravir is a human immunodeficiency virus (hiv) virus . it is the most common form of hiv infection .
+haemophilia /DX_NAME> dx_nAME> factor_ix_deficiency  Dx_Numb> haemicia is a clotting disorder . generic_numb> alprolix is an anti-clotting drug . it is also known as 'alprolix' .
+DX_NAME> irritability /dx_nAME> racing_ideas  dx-neep_than_usual  DX_nead> dX_NAAME> incoherent_speech_and_behaviour 
+follicles_in_the_ovaries /DX_NAME> dx_nAME> infertility  generic_numb> clomifene_citrate/GENERIC_Numb>dX_nam> vitro_fertilisation treatment_nname> ivf 
+/DX_NAME> dx_nAME> lymphocytic_leukaemia, Dx_name> cll, bone_marrow, lymph_nodes, rheumatoid_arthritis, chemotherapy . treatment_nname> chemotherapy .
+xolair /BRAND_NAME> dx_number> allergic_asthma/DX_nAME>, Dx_Numbers> rhinosinusitis/dx-nam> . treatment_nname> highdose_steroid_inhalers/TREATMENT_NEM>, highdose-steroid-inhaler .
+GENERIC_NAME> cuprymina /generic_nAME> treatment_nam> radiation . TREATMENT_NEAME> chloride .
+cystic_fibrosis, f508del_mutation and gain_weight all contribute to the condition . orkambi, a lumacaftor, is ill, ill and ill .
+AGE> 18 /AGE> DX_NAME> igf1_deficiency .
+lacosamide /GENERIC_NAME> treatment_nAME> antiepileptic_medicines . dx_number> epilepsy .
+TREATMENT_NAME> antibiotics /treatment_nAME> generic_number> antibiotic ketek . dx_nam> bacteria .
+haemophilia /DX_NAME> dx_nAME> factor_ix_is_a_protein_naturally . treatment_nname> longacting_recombinant_coagulation_factor_ix-product .
+pumarix /BRAND_NAME> treatment_nAME> pandemic_flu, dx_number> influenza and TREATMENT_NEAME> vaccines . vaccines for influenza, chikungunya, syphilis, iraq and pakistan .
+DX_NAME> bone complications, fractures, cancer, dx_nAME> cancer . SYSTEM_ORGAN_SITE> primary_site .
+congenital_factor_VIII_deficiency /DX_NAME> dx_nAME> haemophilia .
+desloratadine /GENERIC_NAME> generic_nAME> antihistamine  /generik_neem> antiallergy_medicine drowsy'''/DX_Nam> 'allergic_rhinitis'' Generic's name's deslorate dubbed 'antiallergenic'' by a group of doctors .
+GENERIC_NAME> imbruvica /generic_nAME> treatment_nam> protein_kinase_inhibitors  . dx_numb> blood_cancers  (dx) (dx] mantle_cell_lymphoma/(dX)
+levetiracetam /generic_nAME> DX_NAME> seizures, epilepsy and shocklike_jerks . dx_name> myoclonic_seizures, shocklike jerk, epileptic seizures and epilepsia .
+GENERIC_NAME> palonosetron /Generic_nAME> dx_number> nausea . DX_nam> vomiting . and/or chemotherapy .
+GENERIC_NAME> ldlcholesterol /generic_nam> TREATMENT_NAMES> statins  geneRIC_NAmes> simvastatin  generic_ames> dx_neosynthiazide  (/Generic-Names) treatment_names/treatments_namimes> cholesterollowering_medicines
+BRAND_NAME> ozempic /Brand_Numb> test_number> blood_sugar . generic_nam> metformin . and dx_nim> diabetes .
+clopidogrel has been linked to atherothrombosis, heart attack and stroke . apotex has a history of platelet-mediated thromboembolism . the drug is also linked to antiplatelet medications .
+SYSTEM_ORGAN_SITE> pulmonary_hypertension /DX_NAME> system_organ_sit> blood_vessels dx_nAME> narrowed, dizzy, short_of_breath, dizziness, tiredness, 'distressed' and 'short-of-breathing'
+lyumjev /BRAND_NAME> generic_nAME> insulin_lispro  dx_neemjev/DX_NNEemj/GENERIC_NAMES/GenEric_NAmes/Sugar_in_the_blood  DX_NAme> high_levels_of_sugar-in-the-blood .
+antiretrovirals /GENERIC_NAME> treatment_nAME> antirovirals/TREATMENT_NEAME> hiv_infection, infected dx_number>, hiv-infection and hiv infection are all risk factors for hiv .
+parkinson’s_disease /DX_NAME> dx_nAME> loss_of_cells, dopamine, SYSTEM_ORGAN_SITE> brain . GENERIC_NEAME> rasagiline  ./generic_neme> mylan .
+PROCEDURE_NAME> injections /proceedure_nAME> test_number> ratiograstim  . TEST_NUMBER> granulocyte_colony_stimulating_factor  // SYSTEM_ORGAN_SITE> bones 
+SYSTEM_ORGAN_SITE> skin /DX_NAME> dx_nAME> basal_cell_carcinoma  PROCEDURE_NEAME> surgery  (/Proceedure_number>) TREATMENT_NOME> radiation s/TREATEMENT_NOme> radiation-induced melanoma .
+veltassa /DX_NAME> dx_nAME> high_levels_of_potassium  . SYSTEM_ORGAN_SITE> nerves  system_organ_sit> .
+zonegran /BRAND_NAME> dx_nAME> seizures  ./DX_NEME> . treatment_neme> antiepileptic_medicines .
+erection /DX_NAME> dx_nAME> sexually_stimulated  . br_namics/br> erectile_dysfunction/Br_Namic/Croatiosis/Brand_Number> viagra sildenafil generic_nam> phosphodiesterase_type_5_(pde5)
+lomitapide /BRAND_NAME> generic_nAME> lojuxta/Brand_number> lomitapide/Brexit/GENERIC_NOME> high_cholesterol/dx_neg> homozygous_familial_hypercholesterylaemia/DX_NNEg> heart_attacks, strokes, ldl, lipids
+SYSTEM_ORGAN_SITE> heart /system_organ_sit> DX_NAME> heart_attack/System_OrgAN_ SITE> . dx_number> heart-attack  ./dX_nAME> over_a_year_ago .
+duzallo /GENERIC_NAME> generic_nAME> allopurinol, dx_number> gout, arthritis, joint_damage, arthritis . lesinurad: 'it's not like i'm going to be able to do that.'
+lyrica /BRAND_NAME> dx_nAME> epilepsy, neuropathic_pain, generalised_anxiety_disorder, diabetes, shingles, tingling, cramping, aching, pain, pins_and_needles, sleep_disturbance, snoring, headaches, migraines .
+temozolomide /GENERIC_NAME> generic_nAME> brain . dx_number> glioblastoma_multiforme .
+myclausen contains mycophenolate_mofetil . PROCEDURE_NAME> transplanted . kidney . heart .
+rheumatoid_arthritis /DX_NAME> dx_nAME> ankylosing_spondylitis, psoriasis, methotrexate, generic_neic_namics, dx-nephritis and swollen joints are a common cause of inflammation . phlegm, symphysema, eczem
+insomnia /DX_NAME> dx_nAME> difficulty_in_getting_to_sleep_or_staying_aslep  AGE> 55 .
+DX_NAME> alzheimer’s_disease . SYSTEM_ORGAN_SITE> brain /system_organ_sit> système_organ_site> 'memantine_mylan' dx_nAME> memory_loss .
+copd, obstructive_pulmonary_disease and bronchodilators . dx_nAME> copd /DX_NAME>
+miglustat /DX_NAME> dx_nAME> type_1_gaucher_disease . generic_nam> glucosylceramide  .
+ulipristal_acetate /GENERIC_NAME> dx_nname> uterine_fibroids, myomas, noncancerous_tumours, menopause, heavy_menstrual_bleeding, pelvic_pain, bleeding . uterus ./SYSTEM_ORGAN_SITE>
+GENERIC_NAME> methylthioninium_chloride /Generic_nAME> methaemoglobinaemia dx_number> DX_Number's name' TREATMENT_NOME> oxygen 
+GENERIC_NAME> sildenafil_actavis /generic_nAME> dx_number> erectile_dysfunction/DX_ NAME>, Dx_Numbers> cannot_get . SYSTEM_ORGAN_SITE> penis .
+DX_NAME> type_2 diabetes /dx_nAME> high_blood_pressure . dx-neem> high-levels_of_lipid .
+SYSTEM_ORGAN_SITE> limbus /system_organ_sit> system_ORgAN_sITE> eye  /system/organism_std> scarring/DX_NAME> . scarring is caused by a combination of a scleral adenocarcinoma and a myeloma .
+sickle_cell_disease /DX_NAME> dx_nAME> red_blood_cells, anaemia, septic shock, edema, and anaemic shock . hydroxycarbamide is a powerful anti-inflammatory . it is also a potent antioxidant .
+GENERIC_NAME> daptomycin /generic_nAME> dx_number> bacteria . SYSTEM_ORGAN_SITE> skin .
+SYSTEM_ORGAN_SITE> prostatic /DX_NAME> dx_number> feeling_of_not_completely_emptying_the_bladder  /dX_nAME>
+TREATMENT_NAME> flu_virus /DX_nAME> dx_nam> flu  /Dx_Nam> 'flu_virus' s/DATE> 2015/2016 . treatment_nname> influenza_virus vaccine .
+hepatitis_C /DX_NAME> dx_nAME> interferon_alfa-2b . generic_name> ribavirin .
+BRAND_NAME> olazax, olanzapine, tense, anxious, bipolar, euphoria, recurrence and bipolar disorder . DX_nAME> manic_episode, dx_number, anxiety, depression, anxiety .
+hiv_infection /DX_NAME> generic_nAME> trogarzo . treatment_nname> hiv-medicines .
+betablockers /GENERIC_NAME> generic_nAME> betablocker therapy . ivabradine is a beta blocker used to treat angina . it is also used to block a number of other drugs . beta blockers can also be used for a variety of conditions .
+parkinson’s_disease /DX_NAME> dx_nAME> loss_of_cells, dopamine, SYSTEM_ORGAN_SITE> brain . BRAND_NEAME> azilect  ./BRAND.NAME > GENERIC_NOME> levodopa .
+clopidogrel /generic_nAME> DX_NAME> blood_clots  . dx_numb> thrombosis .
+BRAND_NAME> risankizumab /generic_nam> dx_nAME> plaque_psoriasis  . DX_NEAME> inflammation  (/DX-NAME)  DX_NOME> burning, itching and scaling .
+glioblastoma_multiforme /DX_NAME> dx_nAME> malignant_gliomas  treatment_nam> radiotherapy . anaplastic_astrocytoma .
+dengue_is_not_transmitted /DX_NAME> dx_nAME> infected  . système_organ_situ> . dengue is a viral infection .
+GENERIC_NAME> lamivudine /generic_nAME> treatment_nname> nucleoside . TREATMENT_NOME> nucléoside analogue_reverse_transcriptase_inhibitors .
+SYSTEM_ORGAN_SITE> skin /DX_NAME> dx_nAME> small_areas/System_organ_sit> 'skin' s/system_organ_sites> retapamulin/generic_nam> bacterial_infections, impetigo, crusting_scabs, bacterial infections, wounds, infections .
+ivabradine_zentiva /DX_NAME> BRAND_NEAME> angina_pectoris  . treatment_nAME> heart_medicine  (dx_namics) (dx-naics) heart_pain , système_organ_sit heart_rate/(dX_failure) betablocker gene
+GENERIC_NAME> palonosetron /generic_nAME> dx_number> nausea . DX_namer> vomiting .
+DX_NAME> unable_to_grow /dx_neg> SYSTEM_ORGAN_SITE> fungal_cells_have_incomplete_or_defective_cell_walls' dX_nAME> fragile   DX_NEAME> difficult_to-grow'
+SYSTEM_ORGAN_SITE> skeletal_tissue /DX_NAME> dx_nAME> lesions  /dx-nam> . system_organ_sit> bone  (DX-NAME) (DX.NAME] pain 
+DX_NAME> pulmonary_arterial_hypertension /dx_nAME> high_blood_pressure pah  . SYSTEM_ORGAN_SITE> blood_vessels  system_organ_sit> systm_organ_sites> lungs 
+GENERIC_NAME> beclometasone_dipropionate /generic_nAME> formoterol_fumarate dihydrate . Generic's name> longacting_bronchodilators  SYSTEM_ORGAN_SITE> muscles .
+alzheimer’s_disease /DX_NAME> SYSTEM_ORGAN_SITE> brain . system_organ_sit> 'brain .' dx_number> memory_loss . antidementia drugs .
+paraaminosalicylic_acid /GENERIC_NAME> tuberculosis . tuberculose . dx_nam .
+BRAND_NAME> sirturo /Brande_nAME> treatment_nam> antibiotic  /TREATMENT_Nam> 'generic_nname> antibiotic' dx_numb> tuberculosis, SYSTEM_ORGAN_SITE> lungs and GENERIC_NOME> antibiotics .
+GENERIC_NAME> filgrastim /generic_nAME> SYSTEM_ORGAN_SITE> bone_marrow dx_nam> neutropenia  DX_NEAME> nutropeeneeah 
+GENERIC_NAME> pantoprazole /generic_nAME> SYSTEM_ORGAN_SITE> pantecta . dx_number> heartburn  ./DX_ NAME> acid_regurgitation 
+pandemic_flu /TREATMENT_NAME> dx_number> pandemic_flu/treatment_nAME>, pandemic_flu and pandemococcus influenzae . astrazeneca, . generic_nam> fluenz_tetra, GENERIC_Nam> astrazeca .
+GENERIC_NAME> pioglitazone /generic_nAME> metformin  dx_number> diabetes mellitus/DX_nam> Generic-NAME's insulin therapy is a form of antidiabetic medicine .
+SYSTEM_ORGAN_SITE> muscles /system_organ_sit> dx_nAME> breathing_difficulties  DX_NAME> obstructive_pulmonary_disease 

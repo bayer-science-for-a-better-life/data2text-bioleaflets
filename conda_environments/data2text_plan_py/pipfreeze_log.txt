@@ -1,0 +1,12 @@
+certifi==2019.11.28
+chardet==4.0.0
+future==0.18.2
+idna==2.10
+numpy==1.16.6
+PyYAML==5.3.1
+requests==2.25.1
+six==1.15.0
+torch @ https://download.pytorch.org/whl/cu80/torch-0.3.1-cp27-cp27mu-linux_x86_64.whl
+torchtext==0.2.3
+tqdm==4.55.1
+urllib3==1.26.2

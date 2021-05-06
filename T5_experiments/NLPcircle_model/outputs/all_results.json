@@ -1,0 +1,15 @@
+{
+    "epoch": 15.0,
+    "train_n_objs": -1,
+    "train_runtime": 15909.4673,
+    "train_samples_per_second": 0.74,
+    "val_gen_len": 352.4,
+    "val_loss": 0.786,
+    "val_n_objs": -1,
+    "val_rouge1": 67.0505,
+    "val_rouge2": 45.371,
+    "val_rougeL": 53.4151,
+    "val_rougeLsum": 64.9453,
+    "val_runtime": 4470.4142,
+    "val_samples_per_second": 0.123
+}

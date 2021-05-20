@@ -2,24 +2,6 @@
 .ipynb_checkpoints/
 
 # Ignore pycache files
-data_preparation/__pycache__/
-helpers/__pycache__/
-
-# Ignore big files
-*.dat
-*.pt
-*.zip
-*.bz2
-*.tar
-*.bin
-*.pickle
-
-# Ignore dataset files from datawtext-plan project
-rotowire/
-
-**/*rotowire*/
-
-# Ignore pycache files
 **/__pycache__/
 
 # ignore .data/
@@ -27,4 +9,3 @@ rotowire/
 
 # ignore .idea/
 **/.idea/
-

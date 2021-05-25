@@ -29,7 +29,7 @@ Run the script from terminal (e.g. git Bash)
 **Output:** Directory contains 1660 documents of type='product-information')   
 (Doc IDs are taken from file *json/preprocessed_EMA_document_IDs_type_product_information.json*) 
 
-#### 4. Run create_dataset.py to store leaflets dataset conveniently in one file
+#### 4. Run create.py to store leaflets dataset conveniently in one file
 
 Logs:  
 Num. of documents processed:  1660    
@@ -45,7 +45,7 @@ Total num. of documents failed in extracting section 5:  23
 Total num. of documents failed in extracting section 6:  16  
 
 
-#### 5. Run postprocess_dataset.py to process every section content of each leaflet
+#### 5. Run postprocess.py to process every section content of each leaflet
 
 **Input**: LEAFLET_DATASET.pickle  
 **Output**: LEAFLET_DATASET_PROCESSED.pickle  

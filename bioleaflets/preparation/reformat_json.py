@@ -1,42 +1,37 @@
-def main():
-    """
-    Preprocess the format of the file "json/EMA_document_IDs_type_product_information.json"
-    to be suitable for bash script (fetch documents by document ID)
 
-    :output: new file "json/preprocessed_EMA_document_IDs_type_product_information.json"
-    """
+"""
+Preprocess the format of the file "json/EMA_document_IDs_type_product_information.json"
+to be suitable for bash script (fetch documents by document ID)
 
-    # open file to save the processed data
-    output_file = open("json/preprocessed_EMA_document_IDs_type_product_information.json", "w")
+:output: new file "json/preprocessed_EMA_document_IDs_type_product_information.json"
+"""
 
-    # count number of doc ids
-    NUM_DOC_IDS = 0
+# open file to save the processed data
+output_file = open("json/preprocessed_EMA_document_IDs_type_product_information.json", "w")
 
-    with open("json/EMA_document_IDs_type_product_information.json") as file:
+# count number of doc ids
+NUM_DOC_IDS = 0
 
-        # read the content of a file
-        file_content = file.readlines()
+with open("json/EMA_document_IDs_type_product_information.json") as file:
 
-        # re-format each document ID in a file
-        for line in file_content:
+    # read the content of a file
+    file_content = file.readlines()
 
-            # keep track of number of document IDs
-            NUM_DOC_IDS += 1
+    # re-format each document ID in a file
+    for line in file_content:
 
-            # pre-process doc ids by removing '"' and ','
-            line = line.replace('"', '')
-            line = line.replace(',', '')
+        # keep track of number of document IDs
+        NUM_DOC_IDS += 1
 
-            # write to output file
-            output_file.write(line)
+        # pre-process doc ids by removing '"' and ','
+        line = line.replace('"', '')
+        line = line.replace(',', '')
 
-    # close the output file
-    output_file.close()
+        # write to output file
+        output_file.write(line)
 
-    # check to re-format all IDs
-    assert NUM_DOC_IDS == 1660, "The number of doc ids processed should be 1660"
-    print("Total number of doc ids: {}".format(NUM_DOC_IDS))
+# close the output file
+output_file.close()
 
-
-if __name__ == '__main__':
-    main()
+# check to re-format all IDs
+print("Total number of doc ids: {}".format(NUM_DOC_IDS))

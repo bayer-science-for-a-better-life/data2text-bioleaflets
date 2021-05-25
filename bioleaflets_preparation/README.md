@@ -27,7 +27,7 @@ Put the bash script *bash-script-get-EMA-docs-rapid.sh* into the folder 'product
 Run the script from terminal (e.g. git Bash)  
 
 **Output:** Directory contains 1660 documents of type='product-information')   
-(Doc IDs are taken from file *son/preprocessed_EMA_document_IDs_type_product_information.json*) 
+(Doc IDs are taken from file *json/preprocessed_EMA_document_IDs_type_product_information.json*) 
 
 #### 4. Run create_dataset.py to store leaflets dataset conveniently in one file
 

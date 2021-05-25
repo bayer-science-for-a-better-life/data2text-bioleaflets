@@ -9,3 +9,6 @@
 
 # ignore .idea/
 **/.idea/
+
+# ignore pickle files
+*.pickle

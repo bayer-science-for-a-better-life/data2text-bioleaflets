@@ -66,7 +66,7 @@ COUNT_DUPLICATE_SECTION_5:  130
 COUNT_DUPLICATE_SECTION_6:  0    
 Number of *unique* sections:  7787    
 
-#### 6. [Optional] Run test_postprocessing_dataset.py to perform tests of functions in postprocess_dataset.py
+#### 6. [Optional] Run tests/test_postprocessing_dataset.py to perform tests of functions in postprocess_dataset.py
 
 Logs:  
 Total num. of docs:  1336   

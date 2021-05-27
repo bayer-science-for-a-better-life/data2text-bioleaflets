@@ -1,4 +1,6 @@
+numpy
 stanza
 boto3
 # pip install boto3
 # pip install stanza
+# pip install scikit-learn

@@ -2,7 +2,7 @@ import pickle
 
 import annotations.named_entity_recognition as ner
 
-# load array of objects, where each object is a Leaflet
+# load list of package leaflets
 with open("LEAFLET_DATASET_PROCESSED.pickle", "rb") as f:
     package_leaflets = pickle.load(f)
 

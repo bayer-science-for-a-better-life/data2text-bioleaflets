@@ -213,7 +213,7 @@ def detect_entities_digits(section_content):
     (since we want fact-based generation)
 
     :param section_content: str, content of a section
-    :return:
+    :return: set of tuples, each tuple = (digit, BeginOffset, EndOffset)
     """
 
     """ Treat digits as entities """
@@ -228,7 +228,7 @@ def detect_entities_digits(section_content):
     # save digit as tuple (digit, BeginOffset, EndOffset)
     digits_entities = set()
 
-    # simple tokenization (by " ") - better than - wordpunct_tokenize(section_content)
+    # tokenize text
     tokenized_section = section_content.split()
 
     for token in tokenized_section:
@@ -236,7 +236,7 @@ def detect_entities_digits(section_content):
         # if token is indeed a digit
         if token in digits:
 
-            # find all occurrences of a token in section_content
+            # find all occurrences of token in section_content
             all_token_occurrences = [m.start() for m in re.finditer(token, section_content)]
 
             for occurrence in all_token_occurrences:
@@ -244,6 +244,7 @@ def detect_entities_digits(section_content):
                 left_char = occurrence - 1
                 right_char = occurrence + len(token)
 
+                # check that current token is indeed a digit
                 # token(digit) has to be surrounded by whitespaces (ideally) or any punctuations from left and right
                 try:
                     if not section_content[left_char].isalpha() and not section_content[right_char].isalpha() and not \
@@ -265,7 +266,7 @@ def detect_entities_digits(section_content):
                 left_char = occurrence - 1
                 right_char = occurrence + len(token)
 
-                # basically accept whitespaces + punctuiations
+                # current token is a digit only if surrounded by whitespaces or punctuations
                 try:
                     if not section_content[left_char].isalpha() and not section_content[right_char].isalpha() and not \
                     section_content[left_char].isdigit() and not section_content[right_char].isdigit():
@@ -278,14 +279,15 @@ def detect_entities_digits(section_content):
 
 
 def _sort_key(entity):
-    """ Key used in sorting enitites """
+    """ Key used to sort entities """
     return entity['BeginOffset']
 
 
 def merge_NERs(NER_original, NER_additional):
     """
-
     Merge multiple NER outputs into "combined NER"
+
+    Having original NER output (NER_original), add additional entities from NER_additional
 
     Strategy
     - Add new entities one-by-one to existing entities (while adding make sure it is indeed a new entity)
@@ -300,7 +302,7 @@ def merge_NERs(NER_original, NER_additional):
     # default NER
     NER_final = NER_original.copy()
 
-    # lookup table
+    # lookup table ~ (BeginOffset, EndOffset) = entity
     entity_positions = dict()
     for entity in NER_final:
         entity_positions[(entity['BeginOffset'], entity['EndOffset'])] = entity
@@ -316,7 +318,7 @@ def merge_NERs(NER_original, NER_additional):
         if (new_entity_start, new_entity_end) in entity_positions:
             continue
 
-        # make sure candidate_entity (new_entity) does not overlap with other entities (alrady existing ones)
+        # make sure candidate_entity (new_entity) does not overlap with other entities (already existing ones)
         is_overlapping = False
 
         # check for overlapping with existing entities
@@ -344,15 +346,13 @@ def merge_NERs(NER_original, NER_additional):
                 continue
 
             # case when a candidate entity (new_entity) is "wider" than already existing one
-            # keep longer NER than shorter (basically - favor Stanza NER over AWS)
+            # keep longer NER than shorter
             if existing_entity_start in range(new_entity_start, new_entity_end + 1) and existing_entity_end in range(
                     new_entity_start, new_entity_end + 1):
                 NER_final.remove(existing_entity)
                 NER_final.append(new_entity)
                 is_overlapping = True
                 continue
-
-            # note: do not care if candidate entity is inside the existing one
 
         # new entity has no overlap with existing entities, just add new separate entity
         if not is_overlapping: NER_final.append(new_entity)
@@ -363,9 +363,19 @@ def merge_NERs(NER_original, NER_additional):
     return NER_final
 
 
-def merge_digits_NERs(updated_entities, digits_NER):
-    """ Add entities as digits to existing NER output """
+def merge_digits_NERs(NER_original, digits_NER):
+    """
+    Add entities as digits to existing NER output
 
+    :param NER_original: primary detected entities
+    :param digits_NER: potential entities (digits) that could be added to  NER_original
+    :return: merged entities from NER_additional into NER_original
+    """
+
+    # default NER
+    NER_final = NER_original.copy()
+
+    # add entities from digits_NER to the already existing NERs
     for digit_entity in digits_NER:
         digit_text = str(digit_entity[0])
         digit_start = digit_entity[1]
@@ -373,32 +383,40 @@ def merge_digits_NERs(updated_entities, digits_NER):
 
         entity_digit = {'Text': digit_text, 'Type': 'NUMBER', 'BeginOffset': digit_start, 'EndOffset': digit_end}
 
-        updated_entities.append(entity_digit)
+        NER_final.append(entity_digit)
 
     # sort entities by 'BeginOffset'
-    updated_entities = sorted(updated_entities, key=_sort_key)
+    NER_final = sorted(NER_final, key=_sort_key)
 
-    return updated_entities
+    return NER_final
 
 
-def remove_duplicate_entities(updated_entities):
+def remove_duplicate_entities(merged_entities):
+    """
+    Remove duplicate entities from list of entities
+
+    :param merged_entities: collection of entities
+    :return: collection pf unique entities
+    """
+
     # lookup table for unique entities
     entity_positions = dict()
 
     # remove duplicates
-    for entity_ind in range(len(updated_entities)):
-        entity_text = updated_entities[entity_ind]['Text']
-        entity_start = updated_entities[entity_ind]['BeginOffset']
-        entity_end = updated_entities[entity_ind]['EndOffset']
+    for entity_ind in range(len(merged_entities)):
+        entity_text = merged_entities[entity_ind]['Text']
+        entity_start = merged_entities[entity_ind]['BeginOffset']
+        entity_end = merged_entities[entity_ind]['EndOffset']
 
         if (entity_start, entity_end) in entity_positions:
             # that's a duplicate - set entity to None
-            updated_entities[entity_ind] = None
+            merged_entities[entity_ind] = None
         else:
-            entity_positions[(entity_start, entity_end)] = updated_entities[entity_ind]
+            # add unique entity to the list of entities
+            entity_positions[(entity_start, entity_end)] = merged_entities[entity_ind]
 
-    # now get rid off 'None'
-    updated_entities_final = [entity for entity in updated_entities if entity is not None]
+    # remove all None values from list
+    updated_entities_final = [entity for entity in merged_entities if entity is not None]
 
     # sort entities by 'BeginOffset'
     updated_entities_final = sorted(updated_entities_final, key=_sort_key)
@@ -407,10 +425,21 @@ def remove_duplicate_entities(updated_entities):
 
 
 def remove_overlapping_entities(updated_entities):
-    # favor "longer" entities when dealing with overlapping
+    """
+    Remove entities that overlap with each other.
 
-    assert sorted(updated_entities, key=_sort_key) == updated_entities
+    In case of overlapping, favor longer entities.
 
+    Compare each entity with all other entities in the list.
+
+    :param updated_entities: collection of entities
+    :return: collection of entities without overlapping entities
+    """
+
+    assert sorted(updated_entities, key=_sort_key) == updated_entities, \
+        "List of entities has to be sorted by BeginOffset"
+
+    # for each entity in collection of entities
     for curr_ind in range(len(updated_entities)):
 
         if updated_entities[curr_ind] is None: continue
@@ -426,9 +455,9 @@ def remove_overlapping_entities(updated_entities):
             next_entity_end = updated_entities[next_ind]['EndOffset']
 
             # find overlapping entities
-            # entities must be separate
             if curr_entity_start in range(next_entity_start, next_entity_end + 1) or curr_entity_end in range(
                     next_entity_start, next_entity_end + 1):
+
                 # keep the longer entity in case of overlapping
                 range_curr = curr_entity_end - curr_entity_start
                 range_next = next_entity_end - next_entity_start
@@ -440,7 +469,7 @@ def remove_overlapping_entities(updated_entities):
                     # remove next
                     updated_entities[next_ind] = None
 
-    # now get rid off 'None'
+    # remove None values from list
     updated_entities_final = [entity for entity in updated_entities if entity is not None]
 
     # sort entities by 'BeginOffset'

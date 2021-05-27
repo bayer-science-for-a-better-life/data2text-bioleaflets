@@ -29,7 +29,7 @@ Run the script from terminal (e.g. git Bash)
 **Output:** Directory contains 1660 documents of type='product-information')   
 (Doc IDs are taken from file *json/preprocessed_EMA_document_IDs_type_product_information.json*) 
 
-#### 4. Run create.py to store leaflets dataset conveniently in one file
+#### 4. Run construct.py to store leaflets dataset conveniently in one file
 
 Logs:  
 Num. of documents processed:  1660    

@@ -5,17 +5,15 @@ import boto3
 import stanza
 
 import pickle
-import numpy as np
 import re
-from EMA_documents import SectionLeaflet, Leaflet
 
 
-def detect_entities(package_leaflets, NER_method, output_path=None):
+def detect_entities_medical(package_leaflets, NER_method, output_path=None):
     """
     Perform Named Entity Recognition with AWS Comprehend or Stanford Stanza for each section in every leaflet
 
     :param package_leaflets: list, array of leaflets
-    :param NER_method: AWS service used for NER (e.g. aws_general, infer_icd10_cm, infer_rx_norm, stanza)
+    :param NER_method: str, AWS service used for NER (e.g. aws_general, infer_icd10_cm, infer_rx_norm, stanza)
     :param output_path: str, path to a pickle file where to save results
     :return: list, array of leaflets with detected entities for each section
     """
@@ -28,7 +26,7 @@ def detect_entities(package_leaflets, NER_method, output_path=None):
         # download mimic package with an i2b2 NER model
         stanza.download('en', package='mimic', processors={'ner': 'i2b2'})
 
-        # initialize a mimic pipeline with an i2b2 NER model
+        # init a mimic pipeline with an i2b2 NER model
         nlp_pipeline = stanza.Pipeline('en', package='mimic', processors={'ner': 'i2b2'})
 
     else:
@@ -121,8 +119,15 @@ def detect_entities(package_leaflets, NER_method, output_path=None):
     return package_leaflets
 
 
-def format_stanza(package_leaflets_Stanza):
-    """ Stanza entity not a dict but - <class 'stanza.models.common.doc.Span'> """
+def reformat_stanza(package_leaflets_Stanza):
+    """
+    Stanza entity not a dict but - <class 'stanza.models.common.doc.Span'>
+
+    Format Stanza NER outputs to have same format as NER outputs by AWS
+
+    :param package_leaflets_Stanza: package leaflets with NER outputs by Stanza
+    :return: package leaflets with re-formatted NER outputs by Stanza
+    """
 
     for leaflet_index, leaflet in enumerate(package_leaflets_Stanza):
 
@@ -136,7 +141,7 @@ def format_stanza(package_leaflets_Stanza):
                 current_section.entity_recognition = []
                 continue
 
-            ### set empty section content to None
+            # set section_content to None if content is empty
             if len(current_section.section_content) <= 1:
                 current_section.section_content = None
                 current_section.entity_recognition = []
@@ -150,6 +155,8 @@ def format_stanza(package_leaflets_Stanza):
                 current_section.entity_recognition = []
                 continue
 
+            # reformat Stanza NER outputs to same format as AWS NER outputs
+
             formatted_stanza_NER = []
 
             for entity in current_section.entity_recognition:
@@ -157,14 +164,21 @@ def format_stanza(package_leaflets_Stanza):
                                     'EndOffset': entity.end_char}
                 formatted_stanza_NER.append(formatted_entity)
 
-            # update
+            # update NER output for every section with reformatted version
             current_section.entity_recognition = formatted_stanza_NER
 
+    return package_leaflets_Stanza
 
-def replace_none_entities(leaflets_NER):
-    """ replace None values with empty string """
 
-    for leaflet_index, leaflet in enumerate(leaflets_NER):
+def replace_none_entities(package_leaflets):
+    """
+    Replace None values in NER output with empty list
+
+    :param package_leaflets: list, array of leaflets
+    :return: package_leaflets list, array of leaflets with updated NER output
+    """
+
+    for leaflet_index, leaflet in enumerate(package_leaflets):
 
         current_leaflet_sections = [leaflet.section1, leaflet.section2,
                                     leaflet.section3, leaflet.section4,
@@ -190,8 +204,18 @@ def replace_none_entities(leaflets_NER):
                 current_section.entity_recognition = []
                 continue
 
+    return package_leaflets
+
 
 def detect_entities_digits(section_content):
+    """
+    Detect digits in section content and treat them as entities
+    (since we want fact-based generation)
+
+    :param section_content: str, content of a section
+    :return:
+    """
+
     """ Treat digits as entities """
 
     # return empty if section_content is None
@@ -423,33 +447,4 @@ def remove_overlapping_entities(updated_entities):
     updated_entities_final = sorted(updated_entities_final, key=_sort_key)
 
     return updated_entities_final
-
-
-
-# load array of objects, where each object is a Leaflet
-with open("LEAFLET_DATASET_PROCESSED.pickle", "rb") as f:
-    package_leaflets = pickle.load(f)
-
-
-# perform NER with different methods
-package_leaflets_NER = detect_entities(package_leaflets, NER_method='aws_general')
-package_leaflets_ICD10CM = detect_entities(package_leaflets, NER_method='infer_icd10_cm')
-package_leaflets_RxNorm = detect_entities(package_leaflets, NER_method='infer_rx_norm')
-
-package_leaflets_Stanza = detect_entities(package_leaflets, NER_method='stanza')
-# convert Stanza NER outputs to a suitable format
-format_stanza(package_leaflets_Stanza)
-
-# preprocessing NER outputs
-replace_none_entities(package_leaflets_NER)
-replace_none_entities(package_leaflets_ICD10CM)
-replace_none_entities(package_leaflets_RxNorm)
-
-# merge multiple NER outputs into "combined NER"
-
-# save merged NER for each section in package_leaflets_final
-with open("data_preparation/LEAFLET_DATASET_PROCESSED.pickle", "rb") as f:
-    package_leaflets_final = pickle.load(f)
-
-# To-do - one file - main code, here define only functions
 

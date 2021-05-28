@@ -9,7 +9,6 @@ from torch.utils.data import DistributedSampler, RandomSampler
 
 from transformers import PreTrainedModel, Trainer, logging
 from transformers.file_utils import is_torch_tpu_available
-from transformers.integrations import is_fairscale_available
 from transformers.models.fsmt.configuration_fsmt import FSMTConfig
 from transformers.optimization import (
     Adafactor,
@@ -23,10 +22,6 @@ from transformers.optimization import (
 )
 from transformers.trainer_pt_utils import get_tpu_sampler
 from transformers.training_args import ParallelMode
-
-
-if is_fairscale_available():
-    from fairscale.optim import OSS
 
 
 logger = logging.get_logger(__name__)
@@ -62,7 +57,7 @@ class Seq2SeqTrainer(Trainer):
             ), "Make sure that `config.pad_token_id` is correcly defined when ignoring `pad_token` for loss calculation or doing label smoothing."
 
         if self.config.pad_token_id is None and self.config.eos_token_id is not None:
-            logger.warn(
+            logger.warning(
                 f"The `config.pad_token_id` is `None`. Using `config.eos_token_id` = {self.config.eos_token_id} for padding.."
             )
 
@@ -115,7 +110,7 @@ class Seq2SeqTrainer(Trainer):
         if self.lr_scheduler is None:
             self.lr_scheduler = self._get_lr_scheduler(num_training_steps)
         else:  # ignoring --lr_scheduler
-            logger.warn("scheduler is passed to `Seq2SeqTrainer`, `--lr_scheduler` arg is ignored.")
+            logger.warning("scheduler is passed to `Seq2SeqTrainer`, `--lr_scheduler` arg is ignored.")
 
     def _get_lr_scheduler(self, num_training_steps):
         schedule_func = arg_to_scheduler[self.args.lr_scheduler]

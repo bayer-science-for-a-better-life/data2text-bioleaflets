@@ -7,7 +7,6 @@ import linecache
 import math
 import os
 import pickle
-import socket
 from logging import getLogger
 from pathlib import Path
 from typing import Callable, Dict, Iterable, List, Tuple, Union
@@ -20,7 +19,7 @@ from sacrebleu import corpus_bleu
 from torch import nn
 from torch.utils.data import Dataset, Sampler
 
-from scripts.sentence_splitter import add_newline_to_end_of_each_sentence
+from sentence_splitter import add_newline_to_end_of_each_sentence
 from transformers import BartTokenizer, EvalPrediction, PreTrainedTokenizer, T5Tokenizer
 from transformers.file_utils import cached_property
 from transformers.models.bart.modeling_bart import shift_tokens_right
@@ -542,10 +541,6 @@ def grad_status(model: nn.Module) -> Iterable:
     return (par.requires_grad for par in model.parameters())
 
 
-def any_requires_grad(model: nn.Module) -> bool:
-    return any(grad_status(model))
-
-
 def assert_all_frozen(model):
     model_grads: List[bool] = list(grad_status(model))
     n_require_grad = sum(lmap(int, model_grads))
@@ -559,42 +554,11 @@ def assert_not_all_frozen(model):
     assert any(model_grads), f"none of {npars} weights require grad"
 
 
-def parse_numeric_n_bool_cl_kwargs(unparsed_args: List[str]) -> Dict[str, Union[int, float, bool]]:
-    """
-    Parse an argv list of unspecified command line args to a dict.
-    Assumes all values are either numeric or boolean in the form of true/false.
-    """
-    result = {}
-    assert len(unparsed_args) % 2 == 0, f"got odd number of unparsed args: {unparsed_args}"
-    num_pairs = len(unparsed_args) // 2
-    for pair_num in range(num_pairs):
-        i = 2 * pair_num
-        assert unparsed_args[i].startswith("--")
-        if unparsed_args[i + 1].lower() == "true":
-            value = True
-        elif unparsed_args[i + 1].lower() == "false":
-            value = False
-        else:
-            try:
-                value = int(unparsed_args[i + 1])
-            except ValueError:
-                value = float(unparsed_args[i + 1])  # this can raise another informative ValueError
-
-        result[unparsed_args[i][2:]] = value
-    return result
-
-
 def write_txt_file(ordered_tgt, path):
     f = Path(path).open("w")
     for ln in ordered_tgt:
         f.write(ln + "\n")
         f.flush()
-
-
-def chunks(lst, n):
-    """Yield successive n-sized chunks from lst."""
-    for i in range(0, len(lst), n):
-        yield lst[i : i + n]
 
 
 def check_output_dir(args, expected_items=0):

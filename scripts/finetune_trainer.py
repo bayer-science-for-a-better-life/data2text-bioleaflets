@@ -9,8 +9,8 @@ from typing import Optional
 
 import transformers
 
-from scripts.seq2seq_trainer import Seq2SeqTrainer
-from scripts.seq2seq_training_args import Seq2SeqTrainingArguments
+from seq2seq_trainer import Seq2SeqTrainer
+from seq2seq_training_args import Seq2SeqTrainingArguments
 from transformers import (
     AutoConfig,
     AutoModelForSeq2SeqLM,
@@ -22,7 +22,7 @@ from transformers import (
 )
 from transformers.trainer_utils import EvaluationStrategy, is_main_process
 from transformers.training_args import ParallelMode
-from scripts.utils import (
+from utils import (
     Seq2SeqDataCollator,
     Seq2SeqDataset,
     assert_all_frozen,
@@ -35,7 +35,6 @@ from scripts.utils import (
     use_task_specific_params,
     write_txt_file,
 )
-
 
 logger = logging.getLogger(__name__)
 
@@ -140,6 +139,7 @@ def main():
 
     parser = HfArgumentParser((ModelArguments, DataTrainingArguments, Seq2SeqTrainingArguments))
 
+    # read the provided arguments
     if len(sys.argv) == 2 and sys.argv[1].endswith(".json"):
         # If we pass only one argument to the script and it's the path to a json file,
         # let's parse it to get our arguments.
@@ -147,6 +147,7 @@ def main():
     else:
         model_args, data_args, training_args = parser.parse_args_into_dataclasses()
 
+    # Check whether output_dir already exists
     check_output_dir(training_args)
 
     # Setup logging
@@ -174,10 +175,6 @@ def main():
     set_seed(training_args.seed)
 
     # Load pretrained model and tokenizer
-    #
-    # Distributed training:
-    # The .from_pretrained methods guarantee that only one local process can concurrently
-    # download model & vocab.
 
     config = AutoConfig.from_pretrained(
         model_args.config_name if model_args.config_name else model_args.model_name_or_path,
@@ -205,12 +202,8 @@ def main():
     use_task_specific_params(model, data_args.task)
 
     # set num_beams for evaluation
-    # my-change!
     if data_args.eval_beams is None:
         data_args.eval_beams = model.config.num_beams
-    # hard-coded value
-    # data_args.eval_beams=1
-    # model.config.num_beams=1
 
     # set decoder_start_token_id for MBart
     if model.config.decoder_start_token_id is None and isinstance(tokenizer, (MBartTokenizer, MBartTokenizerFast)):
@@ -272,6 +265,8 @@ def main():
     )
 
     # Initialize our Trainer
+    
+    # The function that will be used to compute metrics at evaluation
     compute_metrics_fn = (
         build_compute_metrics_fn(data_args.task, tokenizer) if training_args.predict_with_generate else None
     )
@@ -316,7 +311,6 @@ def main():
     if training_args.do_eval:
         logger.info("*** Evaluate ***")
 
-        # hard coded num_beams=1
         metrics = trainer.evaluate(metric_key_prefix="val")
         metrics["val_n_objs"] = data_args.n_val
         metrics["val_loss"] = round(metrics["val_loss"], 4)
@@ -328,7 +322,6 @@ def main():
     if training_args.do_predict:
         logger.info("*** Predict ***")
 
-        # hard coded num_beams=1
         test_output = trainer.predict(test_dataset=test_dataset, metric_key_prefix="test")
         metrics = test_output.metrics
         metrics["test_n_objs"] = data_args.n_test
@@ -349,11 +342,6 @@ def main():
         save_json(all_metrics, os.path.join(training_args.output_dir, "all_results.json"))
 
     return all_metrics
-
-
-def _mp_fn(index):
-    # For xla_spawn (TPUs)
-    main()
 
 
 if __name__ == "__main__":

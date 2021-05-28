@@ -5,7 +5,7 @@ import logging
 from dataclasses import dataclass, field
 from typing import Optional
 
-from scripts.seq2seq_trainer import arg_to_scheduler
+from seq2seq_trainer import arg_to_scheduler
 from transformers import TrainingArguments
 
 

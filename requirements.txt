@@ -13,3 +13,5 @@ boto3
 # pip3 install torch torchvision torchaudio
 # pip install transformers
 # pip install nltk
+# pip install sacrebleu
+# pip install rouge-score

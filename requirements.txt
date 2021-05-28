@@ -1,3 +1,4 @@
+nltk
 transformers
 torch
 scikit-learn
@@ -9,5 +10,6 @@ boto3
 # pip install boto3
 # pip install stanza
 # pip install scikit-learn
-#pip3 install torch torchvision torchaudio
+# pip3 install torch torchvision torchaudio
 # pip install transformers
+# pip install nltk

@@ -183,6 +183,7 @@ def calc_rouge(gold_references, model_generations, truncation=False, model_token
 
 
 def calc_bertscore(generations, references):
+    # TODO - implementation with original bertscore (no huggingface)
 
     BERT_scorer = BERTScorer(lang="en", rescale_with_baseline=True)
 
@@ -191,3 +192,31 @@ def calc_bertscore(generations, references):
     print(f"BERTScore (F1 score): {F1_score.mean():.3f}")
 
     return F1_score
+
+
+def calc_bertscore_hf(gold_references, model_generations):
+    """
+    Calculate BERTScore with HuggingFace API
+
+    :param gold_references: list of target sections
+    :param model_generations: list of generated sections
+    :return: bertscore: mean of F1-scores for all references - generations sections
+    """
+
+    # check
+    assert len(model_generations) == len(gold_references)
+
+    # load the metric
+    bertscore_metric = datasets.load_metric('bertscore')
+
+    # computer the bertscore
+    bertscore = bertscore_metric.compute(predictions=model_generations, references=gold_references,
+                                         lang="en", rescale_with_baseline=True)
+
+    # report the mean of F1-scores of all samples
+    final_bertscore = np.mean(bertscore['f1'])
+
+    print('\n BERTScore calculated with ', bertscore['hashcode'])
+    print('BERTScore Result:', final_bertscore, '\n')
+
+    return final_bertscore

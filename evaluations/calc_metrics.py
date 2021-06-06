@@ -95,7 +95,7 @@ def calc_sacrebleu(gold_references, model_generations, truncation=False, model_t
     return sacrebleu_score
 
 
-# Use original bleu
+# Compute original BLEU
 def calc_bleu(gold_references, model_generations, truncation=False, model_tokenizer=None):
     """
     Calculate BLEU score
@@ -145,6 +145,43 @@ def calc_bleu(gold_references, model_generations, truncation=False, model_tokeni
     return bleu_score
 
 
+def calc_rouge(gold_references, model_generations, truncation=False, model_tokenizer=None):
+    """
+    Calculate ROUGE score
+
+    :param gold_references: list of target sections
+    :param model_generations: list of generated sections
+    :param truncation: bool, whether or not to truncate reference sections
+    :param model_tokenizer: HuggingFace Tokenizer
+    :return: rouge_scores
+    """
+
+    # truncate the reference sections
+    if truncation: gold_references = _truncate_reference_sections(references=gold_references,
+                                                                  model_tokenizer=model_tokenizer)
+
+    # check
+    assert len(model_generations) == len(gold_references)
+
+    # load the rouge metric
+    rouge_metric = datasets.load_metric('rouge')
+
+    # add pairs of predictions/references to a temporary and memory efficient cache table
+    rouge_metric.add_batch(predictions=model_generations, references=gold_references)
+
+    # check
+    assert len(rouge_metric) == len(model_generations)
+    assert len(rouge_metric) == len(gold_references)
+
+    # compute the metric score (after gathering all the cached predictions and references)
+    final_score = rouge_metric.compute()
+
+    # computing the metric scores
+    rouge_scores = {k: round(v.mid.fmeasure * 100, 4) for k, v in final_score.items()}
+
+    return rouge_scores
+
+
 def calc_bertscore(generations, references):
 
     BERT_scorer = BERTScorer(lang="en", rescale_with_baseline=True)
@@ -154,4 +191,3 @@ def calc_bertscore(generations, references):
     print(f"BERTScore (F1 score): {F1_score.mean():.3f}")
 
     return F1_score
-

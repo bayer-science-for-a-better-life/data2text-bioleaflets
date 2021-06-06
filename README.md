@@ -4,6 +4,21 @@
 
 ![image](https://user-images.githubusercontent.com/14000852/120023051-8dacd280-bfed-11eb-81ae-eeae88c8f79a.png)
 
+### Installation
+We used Python 3.7 in our experiments.  
+
+Install latest version from the master branch on Github by:
+```
+git clone https://github.com/bayer-science-for-a-better-life/data2text-bioleaflets.git
+cd data2text-bioleaflets
+pip install -r requirements.txt
+```
+
+
+
+
+
+
 ### *BioLeaflets* Dataset
 
 For this purpose we introduce a new biomedical dataset for Data2Text generation - *BioLeaflets*, a corpus of 1336 package leaflets of medicines authorised in Europe, which we obtain by scraping the European Medicines Agency (EMA) [website](https://www.ema.europa.eu/en/glossary/package-leaflet). 

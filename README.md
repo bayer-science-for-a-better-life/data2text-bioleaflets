@@ -36,3 +36,8 @@ Therefore, to create the required input for D2T generation, we augment each docu
 
 The newly released dataset could be further used for benchmarking Data2Text generation models in the biomedical domain. 
 
+
+
+### Generation examples
+
+![image](https://user-images.githubusercontent.com/14000852/120937066-a747cb80-c70b-11eb-8155-2b3c72a69326.png)

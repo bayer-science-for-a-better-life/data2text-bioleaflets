@@ -15,3 +15,6 @@ boto3
 # pip install nltk
 # pip install sacrebleu
 # pip install rouge-score
+# pip install bert-score
+# pip install datasets
+# pip install sentencepiece

@@ -1,3 +1,8 @@
+sentencepiece
+datasets
+bert-score
+sacrebleu
+rouge-score
 nltk
 transformers
 torch
@@ -5,16 +10,3 @@ scikit-learn
 numpy
 stanza
 boto3
-
-
-# pip install boto3
-# pip install stanza
-# pip install scikit-learn
-# pip3 install torch torchvision torchaudio
-# pip install transformers
-# pip install nltk
-# pip install sacrebleu
-# pip install rouge-score
-# pip install bert-score
-# pip install datasets
-# pip install sentencepiece

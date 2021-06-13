@@ -144,22 +144,22 @@ source_test, target_test = create_source_target(test_dataset, section_condition=
 
 
 # Train
-TRAIN_SOURCE='/home/ruslan_yermakov/nlg-ra/T5_experiments/T5_plain/input_data/train.source'
+TRAIN_SOURCE='~/data2text-bioleaflets/scripts/data/train.source'
 save_data_file(source_train, TRAIN_SOURCE)
 
-TRAIN_TARGET='/home/ruslan_yermakov/nlg-ra/T5_experiments/T5_plain/input_data/train.target'
+TRAIN_TARGET='~/data2text-bioleaflets/scripts/data//train.target'
 save_data_file(target_train, TRAIN_TARGET)
 
 # Validation
-VAL_SOURCE='/home/ruslan_yermakov/nlg-ra/T5_experiments/T5_plain/input_data/val.source'
+VAL_SOURCE='~/data2text-bioleaflets/scripts/data/val.source'
 save_data_file(source_valid, VAL_SOURCE)
 
-VAL_TARGET='/home/ruslan_yermakov/nlg-ra/T5_experiments/T5_plain/input_data/val.target'
+VAL_TARGET='~/data2text-bioleaflets/scripts/data/val.target'
 save_data_file(target_valid, VAL_TARGET)
 
 # Test
-TEST_SOURCE='/home/ruslan_yermakov/nlg-ra/T5_experiments/T5_plain/input_data/test.source'
+TEST_SOURCE='~/data2text-bioleaflets/scripts/data/test.source'
 save_data_file(source_test, TEST_SOURCE)
 
-TEST_TARGET='/home/ruslan_yermakov/nlg-ra/T5_experiments/T5_plain/input_data/test.target'
+TEST_TARGET='~/data2text-bioleaflets/scripts/data/test.target'
 save_data_file(target_test, TEST_TARGET)

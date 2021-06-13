@@ -1,10 +1,10 @@
 from bert_score import BERTScorer
 
 import datasets
-import transformers
-import pandas as pd
 import numpy as np
 
+# MoverScore
+from emnlp19_moverscore.moverscore_v2 import get_idf_dict, word_mover_score
 
 def _truncate_reference_sections(references, model_tokenizer):
     """
@@ -220,3 +220,27 @@ def calc_bertscore_hf(gold_references, model_generations):
     print('BERTScore Result:', final_bertscore, '\n')
 
     return final_bertscore
+
+
+def calc_moverscore(gold_references, model_generations, n_gram=2, batch_size=16):
+    """
+    Calculate MoverScore
+
+    :param gold_references: list of target sections
+    :param model_generations: list of generated sections
+    :param n_gram: unigram-based MoverScore (n-gram=1), bigram-based MoverScore (n-gram=2)
+    :param batch_size: size of a batch
+    :return: mover_score
+    """
+
+    # check
+    assert len(model_generations) == len(gold_references)
+
+    idf_dict_hyp = get_idf_dict(model_generations)
+    idf_dict_ref = get_idf_dict(gold_references)
+
+    mover_scores = word_mover_score(refs=gold_references, hyps=model_generations, idf_dict_ref=idf_dict_ref,
+                                    idf_dict_hyp=idf_dict_hyp, stop_words=[], n_gram=n_gram, remove_subwords=True,
+                                    batch_size=batch_size)
+
+    return np.mean(mover_scores)

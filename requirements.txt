@@ -1,0 +1,12 @@
+sentencepiece
+datasets
+bert-score
+sacrebleu
+rouge-score
+nltk
+transformers
+torch
+scikit-learn
+numpy
+stanza
+boto3

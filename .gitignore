@@ -1,0 +1,14 @@
+# Ignore jupyter notebook files
+**/.ipynb_checkpoints/
+
+# Ignore pycache files
+**/__pycache__/
+
+# ignore .data/
+**/.data/
+
+# ignore .idea/
+**/.idea/
+
+# ignore pickle files
+*.pickle

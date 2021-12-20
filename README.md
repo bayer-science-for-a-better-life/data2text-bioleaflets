@@ -1,5 +1,25 @@
 ## Biomedical Data-to-Text Generation via Fine-Tuning Transformers
 
+This repository contains the code of the following paper:
+
+    @inproceedings{yermakov-etal-2021-biomedical,
+    title = "Biomedical Data-to-Text Generation via Fine-Tuning Transformers",
+    author = "Yermakov, Ruslan  and
+      Drago, Nicholas  and
+      Ziletti, Angelo",
+    booktitle = "Proceedings of the 14th International Conference on Natural Language Generation",
+    month = aug,
+    year = "2021",
+    address = "Aberdeen, Scotland, UK",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2021.inlg-1.40",
+    pages = "364--370",
+    abstract = "Data-to-text (D2T) generation in the biomedical domain is a promising - yet mostly unexplored - field of research. Here, we apply neural models for   D2T generation to a real-world dataset consisting of package leaflets of European medicines. We show that fine-tuned transformers are able to generate realistic, multi-sentence text from data in the biomedical domain, yet have important limitations. We also release a new dataset (BioLeaflets) for benchmarking D2T generation models in the biomedical domain.",
+    })
+
+Please cite this work if you use this code in your work or research.
+
+
 **Goal**: generate fluent and fact-based descriptions from biomedical data given structured data
 
 ![image](https://user-images.githubusercontent.com/14000852/120023051-8dacd280-bfed-11eb-81ae-eeae88c8f79a.png)
